@@ -21,8 +21,14 @@ const roboto = Roboto({
   display: "swap",
 });
 
+// Drop the "(Horatio)" parenthetical for the browser-tab title.
+const shortName = profile.name.replace(/\s*\([^)]*\)/g, "").trim();
+
 export const metadata: Metadata = {
-  title: `${profile.name} — ${profile.title}`,
+  title: {
+    default: shortName,
+    template: `%s · ${shortName}`,
+  },
   description: profile.tagline,
   openGraph: {
     title: `${profile.name} — ${profile.title}`,

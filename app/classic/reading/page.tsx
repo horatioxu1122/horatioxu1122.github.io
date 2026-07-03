@@ -3,7 +3,7 @@ import { profile, readingByCategory } from "@/lib/content";
 import { renderInline } from "@/lib/format";
 
 export const metadata: Metadata = {
-  title: `Reading list — ${profile.name}`,
+  title: "Reading list",
   description: `Books and papers ${profile.name} is reading.`,
 };
 

@@ -9,7 +9,6 @@ import {
 import { renderInline } from "@/lib/format";
 
 export const metadata: Metadata = {
-  title: `${profile.name} — ${profile.title}`,
   description: profile.tagline,
 };
 

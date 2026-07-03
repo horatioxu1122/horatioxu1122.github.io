@@ -3,7 +3,7 @@ import { about, profile } from "@/lib/content";
 import { renderInline } from "@/lib/format";
 
 export const metadata: Metadata = {
-  title: `About — ${profile.name}`,
+  title: "About",
   description: `About ${profile.name}`,
 };
 
