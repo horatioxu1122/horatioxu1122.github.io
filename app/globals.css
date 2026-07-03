@@ -1,8 +1,17 @@
 @import "tailwindcss";
 
+/* Manual (class-based) dark mode: `dark:` utilities respond to a `.dark`
+   class on <html>, toggled by the theme button + a no-flash script. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --accent: #1772d0;
+  --accent-hover: #0f5aa8;
+  --heading: #0f766e;
+  --research: #a16207;
+  --nav: #b509ac;
 }
 
 @theme inline {
@@ -12,15 +21,93 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Accent: academic blue (light) with a lighter blue for dark mode. */
+html.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --accent: #60a5fa;
+  --accent-hover: #93c5fd;
+  --heading: #5eead4;
+  --research: #d6a760;
+  --nav: #e879f9;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Classic view typography — inspired by delara.github.io.
+   Roboto (light 300) body, 1rem / 1.6 line-height. Scoped so the
+   terminal/landing keep their own (mono/sans) identity.
+   ────────────────────────────────────────────────────────────── */
+.classic {
+  font-family: var(--font-roboto), "Helvetica Neue", Arial, sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.classic h1,
+.classic h2,
+.classic h3,
+.classic .sans,
+.classic .section-label {
+  font-family: var(--font-roboto), "Helvetica Neue", Arial, sans-serif;
+}
+/* Section headings use the teal --heading accent (distinct from blue links). */
+.classic .section-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--heading);
+  margin-bottom: 0.75rem;
+}
+.classic li::marker {
+  color: var(--accent);
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Terminal color themes. The <Terminal> root sets data-theme=…
+   ────────────────────────────────────────────────────────────── */
+.term-root[data-theme="matrix"] {
+  --term-bg: #0b0f0c;
+  --term-fg: #c8f7d4;
+  --term-accent: #3ef08e;
+  --term-muted: #5c7a66;
+  --term-link: #7ee0ff;
+  --term-prompt: #3ef08e;
+}
+.term-root[data-theme="amber"] {
+  --term-bg: #160f06;
+  --term-fg: #ffd9a0;
+  --term-accent: #ffb454;
+  --term-muted: #9a774a;
+  --term-link: #ffe2b0;
+  --term-prompt: #ffb454;
+}
+.term-root[data-theme="mono"] {
+  --term-bg: #0c0c0c;
+  --term-fg: #e6e6e6;
+  --term-accent: #ffffff;
+  --term-muted: #7a7a7a;
+  --term-link: #a8c7fa;
+  --term-prompt: #e6e6e6;
+}
+.term-root[data-theme="dracula"] {
+  --term-bg: #282a36;
+  --term-fg: #f8f8f2;
+  --term-accent: #bd93f9;
+  --term-muted: #6272a4;
+  --term-link: #8be9fd;
+  --term-prompt: #50fa7b;
+}
+.term-root[data-theme="light"] {
+  --term-bg: #f7f7f4;
+  --term-fg: #1f2328;
+  --term-accent: #0a7d33;
+  --term-muted: #6b7280;
+  --term-link: #1257c5;
+  --term-prompt: #0a7d33;
 }
