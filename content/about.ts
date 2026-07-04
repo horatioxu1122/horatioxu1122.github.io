@@ -34,7 +34,7 @@ export const about: AboutContent = {
       type: "text",
       body: [
         "As I graduated Mannes Prep, I've grown more interested in transcribing music into readable music sheets. Some of my works are uploaded [here](https://space.bilibili.com/66518067).",
-        "I'm also a highly passionate political science/national security/naval warfare enthusiast. I've been a proud and terminally online member of the Election Twitter and NatSec Twitter for many years. Interact with my politics-focused alt Twitter account through my main profile on homepage!"
+        "I'm also a highly passionate political science/national security/naval warfare enthusiast. I've been a proud and terminally online member of the Election Twitter and NatSec Twitter for many years (I'm followed by Larry Sabato and Yuan Yi Zhu!). Interact with my politics-focused alt Twitter account through my main profile on homepage!"
       ],
     },
     {
