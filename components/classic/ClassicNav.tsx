@@ -9,6 +9,7 @@ const LINKS = [
   { href: "/classic", label: "Home" },
   { href: "/classic/about", label: "About me" },
   { href: "/classic/reading", label: "Reading list" },
+  { href: "/classic/projects", label: "Projects" },
 ];
 
 export default function ClassicNav() {

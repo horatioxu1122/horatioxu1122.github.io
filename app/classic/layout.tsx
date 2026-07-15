@@ -68,6 +68,9 @@ export default function ClassicLayout({
               />
             ) : null}
           </p>
+          {profile.email ? (
+            <p className="mt-1 text-sm text-zinc-500">{profile.email}</p>
+          ) : null}
           {profile.location ? (
             <p className="text-sm text-zinc-500">{profile.location}</p>
           ) : null}
