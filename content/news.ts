@@ -15,6 +15,10 @@ export const news: NewsItem[] = [
     text: "I'm thrilled to be invited to give a talk at [International Conference on Im/migration, AI and Social Justice](https://www.fordham.edu/academics/research/office-of-research/events/international-conference-on-immigration-ai-and-social-justice/)!",
   },
   {
+    date: "2025-11-23",
+    text: "An event I help to co-organize, the Clavius Distinguished Lecture, will be held at Bepler Commons, Faber Hall, Rose Hill Campus, on Nov. 25th at 2:30 p.m. The event will feature Dr. Samuel Yen-Chi Chen, a Lead Scientist at Wells Fargo. The talk will center around quantum circuits and quantum agents. Free food and drinks will be served. Come check it out!",
+  },
+  {
     date: "2025-10-10",
     text: "An event I help to co-organize, [Symposium on Responsibel AI](https://www.fordham.edu/academics/research/office-of-research/events/symposium-on-responsible-ai/), which is sponsored by Fordham, NYU, IBM, and the AI Alliance, will be held at Fordham on Oct. 16-17. Come check it out!",
   },
@@ -29,6 +33,10 @@ export const news: NewsItem[] = [
   {
     date: "2025-07-15",
     text: "I will serve on the program committee of [ICTAI 2025](https://ictai.computer.org/2025/).",
+  },
+  {
+    date: "2025-04-25",
+    text: "An event I help to co-organize, the Clavius Distinguished Lecture, will be held at Fordham Law School, Room 3-02, on April. 28th at 6:00 p.m. The event will feature Dr. Djallel Bouneffouf, an IEEE fellow and Senior Research Scientist at IBM. The talk will center around morality and social emergence in agentic AI systems. Free food and drinks will be served. Come check it out!",
   },
   {
     date: "2025-03-03",
