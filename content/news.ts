@@ -16,7 +16,7 @@ export const news: NewsItem[] = [
   },
   {
     date: "2025-11-23",
-    text: "An event I help to co-organize, the Clavius Distinguished Lecture, will be held at Bepler Commons, Faber Hall, Rose Hill Campus, on Nov. 25th at 2:30 p.m. The event will feature Dr. Samuel Yen-Chi Chen, a Lead Scientist at Wells Fargo. The talk will center around quantum circuits and quantum agents. Free food and drinks will be served. Come check it out!",
+    text: "An event I help to co-organize, the Clavius Distinguished Lecture, will be held at *Bepler Commons, Faber Hall, Rose Hill Campus, on Nov. 25th at 2:30 p.m*. The event will feature **Dr. Samuel Yen-Chi Chen**, a Lead Scientist at Wells Fargo. The talk will center around **quantum circuits and quantum agents**. Free food and drinks will be served. Come check it out!",
   },
   {
     date: "2025-10-10",
@@ -36,7 +36,7 @@ export const news: NewsItem[] = [
   },
   {
     date: "2025-04-25",
-    text: "An event I help to co-organize, the Clavius Distinguished Lecture, will be held at Fordham Law School, Room 3-02, on April. 28th at 6:00 p.m. The event will feature Dr. Djallel Bouneffouf, an IEEE fellow and Senior Research Scientist at IBM. The talk will center around morality and social emergence in agentic AI systems. Free food and drinks will be served. Come check it out!",
+    text: "An event I help to co-organize, the Clavius Distinguished Lecture, will be held at *Fordham Law School, Room 3-02, on April. 28th at 6:00 p.m.* The event will feature Dr. **Djallel Bouneffouf**, an IEEE fellow and Senior Research Scientist at IBM. The talk will center around **morality and social emergence in agentic AI systems**. Free food and drinks will be served. Come check it out!",
   },
   {
     date: "2025-03-03",
