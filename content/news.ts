@@ -3,11 +3,15 @@ import type { NewsItem } from "./types";
 // EDIT ME — newest first. Inline links allowed as [text](url).
 export const news: NewsItem[] = [
   {
-    date: "2025-03-12",
+    date: "2026-07-07",
+    text: "Our paper is accepted [QCE 2026](https://qce.quantum.ieee.org/2026/).",
+  },
+  {
+    date: "2026-03-12",
     text: "I will serve on the program committee of [ICTAI 2026](https://ictai.computer.org/2026/).",
   },
   {
-    date: "2025-03-11",
+    date: "2026-03-11",
     text: "I'm thrilled to be invited to give a talk at [International Conference on Im/migration, AI and Social Justice](https://www.fordham.edu/academics/research/office-of-research/events/international-conference-on-immigration-ai-and-social-justice/)!",
   },
   {
