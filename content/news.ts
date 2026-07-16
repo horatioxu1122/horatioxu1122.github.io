@@ -4,7 +4,7 @@ import type { NewsItem } from "./types";
 export const news: NewsItem[] = [
   {
     date: "2026-07-07",
-    text: "Our paper is accepted [QCE 2026](https://qce.quantum.ieee.org/2026/).",
+    text: "Our paper was accepted [QCE 2026](https://qce.quantum.ieee.org/2026/)!",
   },
   {
     date: "2026-03-12",
