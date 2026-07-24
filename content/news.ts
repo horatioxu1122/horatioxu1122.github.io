@@ -3,6 +3,10 @@ import type { NewsItem } from "./types";
 // EDIT ME — newest first. Inline links allowed as [text](url).
 export const news: NewsItem[] = [
   {
+    date: "2026-07-20",
+    text: "I'm thrilled to be invited to give a talk at the Clavius Distinguished Workshop on Trustworthy AI on July 22nd, 2026, where I will talk about our latest work on hybrid quantum-classical machine learning! Come check it out!",
+  },
+  {
     date: "2026-07-07",
     text: "Our paper was accepted [QCE 2026](https://qce.quantum.ieee.org/2026/)!",
   },
