@@ -1,12 +1,12 @@
 import type { AboutBlock } from "@/lib/content";
 import { renderInline, youtubeEmbed } from "@/lib/format";
 
-const link = "text-white underline decoration-white/40 underline-offset-2 hover:decoration-white";
+const link = "text-nf-fg underline decoration-current/40 underline-offset-2 hover:decoration-current";
 
 /** Text, video and section blocks inside the details window. */
 export default function Blocks({ blocks }: { blocks: AboutBlock[] }) {
   return (
-    <div className="flex flex-col gap-5 text-[0.95rem] leading-relaxed text-[#d2d2d2]">
+    <div className="flex flex-col gap-5 text-[0.95rem] leading-relaxed text-nf-body">
       {blocks.map((block, i) => {
         if (block.type === "text") {
           return (
@@ -40,7 +40,7 @@ export default function Blocks({ blocks }: { blocks: AboutBlock[] }) {
 
         return (
           <section key={i} className="flex flex-col gap-2">
-            <h3 className="text-base font-semibold text-white">{block.title}</h3>
+            <h3 className="text-base font-semibold text-nf-fg">{block.title}</h3>
             {block.list ? (
               <ul className="ml-5 flex list-disc flex-col gap-1.5 marker:text-[#e50914]">
                 {block.body.map((item, j) => (

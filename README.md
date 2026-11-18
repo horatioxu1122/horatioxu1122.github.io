@@ -8,12 +8,18 @@ Every page reads from one shared content source, so you edit your info once.
   banner clip change.
 - **Home** (`/browse`) — a big banner with social icons, "View CV" and "More Info", a sideways row
   of research cards, publications as an "episodes" list with full titles, a short dated news list,
-  and a "Continue Watching for <profile>" row. Click a research card to open its details window;
-  "About me" in the top bar opens the about window.
+  and a "Continue Watching for <profile>" row. Click a research card or a paper to open its details
+  window (a paper's window shows its abstract); "About me" in the top bar opens the about window.
+  The home page shows the newest 10 papers. If there are more, a "See all" link opens
+  `/browse/publications`.
+- **Top bar** — search (titles, people, topics across every page) and a profile menu with
+  "Dark mode" and "Auto" switches. Dark is the default; Auto follows the device setting.
+  The choice is saved in the browser.
 - **Continue Watching pages** — each with its own layout:
   - `/browse/teaching` — a timeline of terms ("seasons" of each course)
   - `/browse/service` — Service, then Awards, as numbered tile rows (Netflix "Top 10" look), newest first
   - `/browse/reading` — a bookshelf of poster tiles, one shelf per category
+- **`/browse/publications`** — every paper, newest first
 
 Built with Next.js (App Router), TypeScript and Tailwind CSS v4, as a static export.
 
@@ -25,7 +31,7 @@ Everything lives in [`content/`](content/) — these are the only files you norm
 |------|---------------|
 | `content/profile.ts` | name, title, bio, research interests, socials, email, CV path, photo |
 | `content/news.ts` | news items |
-| `content/publications.ts` | papers, shown with their full titles (an optional `abstract` shows under each paper) |
+| `content/publications.ts` | papers, shown with their full titles (the `abstract` shows in each paper's window) |
 | `content/awards.ts` | awards & honors (`/browse/service`) |
 | `content/service.ts` | program committees, organizing, etc. (`/browse/service`) |
 | `content/teaching.ts` | courses, newest first (`/browse/teaching`) |
@@ -39,6 +45,7 @@ Drop a `CV.pdf` and a `profile.jpg` into [`public/`](public/) (paths are set in 
 Inline formatting in text fields: `**bold**`, `*italic*`, `[text](url)`.
 
 To rename or reorder the rows on the home page, edit [`lib/browse.ts`](lib/browse.ts).
+The number of papers on the home page is `HOME_PAPERS` in the same file.
 
 ## Develop
 

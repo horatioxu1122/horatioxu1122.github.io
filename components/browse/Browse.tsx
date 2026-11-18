@@ -9,6 +9,7 @@ import type {
   NewsEntry,
   PaperEntry,
 } from "@/lib/browse";
+import { HOME_PAPERS } from "@/lib/browse";
 import { landing } from "@/lib/content";
 import Billboard from "./Billboard";
 import BrowseEpisodes from "./BrowseEpisodes";
@@ -47,20 +48,30 @@ export default function Browse({
   const { viewer, switchViewer } = useViewer();
   const current = landing.profiles[viewer] ?? landing.profiles[0];
 
-  // "About me" on a sub-page links to /browse#about: open the window here.
+  // Links like /browse#about (top bar on the sub-pages) or #research-0 (search)
+  // open that window here — on arrival, or later when the hash changes.
   useEffect(() => {
-    const id = requestAnimationFrame(() => {
-      if (window.location.hash === "#about") {
-        setSelected(about);
+    const fromHash = () => {
+      const hash = decodeURIComponent(window.location.hash.slice(1));
+      const item =
+        hash === "about" ? about : rows.flatMap((r) => r.items).find((it) => it.id === hash);
+      if (item) {
+        setSelected(item);
         history.replaceState(null, "", window.location.pathname);
       }
-    });
-    return () => cancelAnimationFrame(id);
-  }, [about]);
+    };
+    const id = requestAnimationFrame(fromHash);
+    window.addEventListener("hashchange", fromHash);
+    return () => {
+      cancelAnimationFrame(id);
+      window.removeEventListener("hashchange", fromHash);
+    };
+  }, [about, rows]);
 
   return (
-    <div className="nf-page min-h-screen w-full bg-[#141414] text-white">
+    <div className="nf-page min-h-screen w-full bg-nf-bg text-nf-fg">
       <BrowseNav
+        overDark
         viewer={viewer}
         onSwitch={switchViewer}
         links={[
@@ -78,7 +89,12 @@ export default function Browse({
           {rows.map((row) => (
             <Row key={row.id} row={row} initials={billboard.initials} onOpen={setSelected} />
           ))}
-          <BrowseEpisodes items={papers} initials={billboard.initials} />
+          <BrowseEpisodes
+            items={papers}
+            initials={billboard.initials}
+            limit={HOME_PAPERS}
+            seeAllHref="/browse/publications"
+          />
           <BrowseNews items={news} />
           <ContinueWatching items={continueItems} viewerName={current?.name ?? ""} />
         </div>

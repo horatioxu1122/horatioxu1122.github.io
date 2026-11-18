@@ -5,8 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import Wordmark from "@/components/landing/Wordmark";
 import ProfileAvatar from "@/components/landing/ProfileAvatar";
 import { landing, profile } from "@/lib/content";
+import NavSearch from "./NavSearch";
+import { useTheme } from "./useTheme";
 
-const navLink = "transition-colors hover:text-[#b3b3b3]";
+const navLink = "transition-colors hover:text-nf-muted";
 
 /** "#news" stays on the page; "/browse#news" is a link to another page. */
 function NavAnchor({
@@ -32,10 +34,38 @@ function NavAnchor({
   );
 }
 
+/** An on/off switch for the profile menu (red when on, like vicflix). */
+function Switch({ label, on, onChange }: { label: string; on: boolean; onChange: (on: boolean) => void }) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={on}
+      onClick={() => onChange(!on)}
+      className="flex w-full items-center justify-between gap-3 px-4 py-2 text-left"
+    >
+      <span>{label}</span>
+      <span
+        aria-hidden="true"
+        className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${on ? "bg-[#e50914]" : "bg-nf-line-strong"}`}
+      >
+        <span
+          className={`absolute top-0.5 size-5 rounded-full bg-white shadow transition-transform ${
+            on ? "translate-x-[1.375rem]" : "translate-x-0.5"
+          }`}
+        />
+      </span>
+    </button>
+  );
+}
+
 /**
- * Top bar: name logo, section links, "About me", and the profile menu.
- * It is see-through over the banner and turns solid after you scroll.
- * `viewer` is the index of the picked profile; `onSwitch` picks another one.
+ * Top bar: name logo, section links, "About me", search, and the profile menu
+ * (other profile, Dark mode / Auto switches, CV).
+ *
+ * On the home page (`overDark`), the bar sits over the dark banner, so it
+ * stays dark until you scroll; then it turns to the page color. On the
+ * sub-pages it uses the page colors from the start.
  *
  * On the home page, links are "#section" anchors, the section on screen is
  * highlighted, and "About me" opens a window (`onAbout`). On the sub-pages,
@@ -50,6 +80,7 @@ export default function BrowseNav({
   aboutHref = "/browse#about",
   logoHref = "#top",
   highlight = true,
+  overDark = false,
 }: {
   links: { href: string; label: string }[];
   viewer: number;
@@ -58,12 +89,14 @@ export default function BrowseNav({
   aboutHref?: string;
   logoHref?: string;
   highlight?: boolean;
+  overDark?: boolean;
 }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  // The section on screen; its link is white and bold, like the current tab on Netflix.
+  // The section on screen; its link is bold, like the current tab on Netflix.
   const [active, setActive] = useState(links[0]?.href ?? "");
   const menu = useRef<HTMLDivElement>(null);
+  const theme = useTheme();
   // A stable key for the effect below (the `links` array is new on every render).
   const hrefs = links.map((l) => l.href).join(" ");
 
@@ -108,6 +141,8 @@ export default function BrowseNav({
   }, [open]);
 
   const current = landing.profiles[viewer] ?? landing.profiles[0];
+  // Over the dark banner, the bar is dark in both modes.
+  const forceDark = overDark && !scrolled;
 
   const linkItems = (
     <>
@@ -115,7 +150,7 @@ export default function BrowseNav({
         const isActive = highlight && active === l.href;
         return (
           <li key={l.href} className="shrink-0">
-            <NavAnchor href={l.href} current={isActive} className={isActive ? "font-bold text-white" : navLink}>
+            <NavAnchor href={l.href} current={isActive} className={isActive ? "font-bold text-nf-fg" : navLink}>
               {l.label}
             </NavAnchor>
           </li>
@@ -137,8 +172,9 @@ export default function BrowseNav({
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-30 transition-colors duration-500 ${
-        scrolled ? "bg-[#141414]" : "bg-linear-to-b from-black/75 to-transparent"
+      data-theme={forceDark ? "dark" : undefined}
+      className={`fixed inset-x-0 top-0 z-30 text-nf-fg-2 transition-colors duration-500 ${
+        scrolled ? "bg-nf-bg" : overDark ? "bg-linear-to-b from-black/75 to-transparent" : "bg-transparent"
       }`}
     >
       {/* Netflix: logo about 93 × 25px, about 25px before the first link. */}
@@ -146,9 +182,11 @@ export default function BrowseNav({
         <NavAnchor href={logoHref} className="shrink-0">
           <Wordmark text={landing.wordmark} className="text-[clamp(1.25rem,1.72vw,1.6rem)]" />
         </NavAnchor>
-        <ul className="hidden items-center gap-5 text-sm text-[#e5e5e5] md:flex">{linkItems}</ul>
+        <ul className="hidden items-center gap-5 text-sm md:flex">{linkItems}</ul>
 
-        <div className="ml-auto flex items-center gap-5 text-sm text-[#e5e5e5]">
+        <div className="ml-auto flex items-center gap-4 text-sm sm:gap-5">
+          <NavSearch />
+
           {profile.cv ? (
             <a href={profile.cv} target="_blank" rel="noreferrer" className={`hidden sm:inline ${navLink}`}>
               CV
@@ -179,7 +217,7 @@ export default function BrowseNav({
               {open ? (
                 <div
                   role="menu"
-                  className="absolute right-0 top-[calc(100%+0.9rem)] w-56 rounded border border-white/15 bg-black/90 py-2 text-sm shadow-xl backdrop-blur"
+                  className="absolute right-0 top-[calc(100%+0.9rem)] w-60 rounded border border-nf-line bg-nf-popover py-2 text-sm text-nf-fg shadow-xl backdrop-blur"
                 >
                   {landing.profiles.map((p, i) =>
                     i === viewer ? null : (
@@ -201,9 +239,15 @@ export default function BrowseNav({
                   <Link role="menuitem" href="/" className="block px-4 py-2 hover:underline">
                     Back to profiles
                   </Link>
+
+                  <div className="my-2 border-t border-nf-line" />
+                  {/* Dark mode / Auto (Auto follows the device setting) */}
+                  <Switch label="Dark mode" on={theme.dark} onChange={theme.setDark} />
+                  <Switch label="Auto" on={theme.auto} onChange={theme.setAuto} />
+
                   {profile.cv ? (
                     <>
-                      <div className="my-2 border-t border-white/15" />
+                      <div className="my-2 border-t border-nf-line" />
                       <a
                         role="menuitem"
                         href={profile.cv}
@@ -223,9 +267,7 @@ export default function BrowseNav({
       </nav>
 
       {/* On small screens the section links sit in a sideways strip under the bar. */}
-      <ul className="nf-scroller flex gap-5 overflow-x-auto px-[4%] pb-2.5 text-sm text-[#e5e5e5] md:hidden">
-        {linkItems}
-      </ul>
+      <ul className="nf-scroller flex gap-5 overflow-x-auto px-[4%] pb-2.5 text-sm md:hidden">{linkItems}</ul>
     </header>
   );
 }

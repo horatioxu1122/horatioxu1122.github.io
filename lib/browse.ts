@@ -81,6 +81,8 @@ export interface PaperEntry {
   isNew: boolean;
   /** tile gradient, an index into PALETTES */
   palette: number;
+  /** the details window for this paper (abstract, authors, venue, links) */
+  detail: BrowseItem;
 }
 
 /** One line of the news list. */
@@ -155,22 +157,46 @@ function researchRow(r: number): BrowseRow {
 
 const ROWS = [researchRow];
 
+/** How many papers /browse shows; with more, a "See all" button links to /browse/publications. */
+export const HOME_PAPERS = 10;
+
 /** Publications in the order of content/publications.ts (newest first), numbered like episodes. */
-function paperEntries(): PaperEntry[] {
-  return publications.map((p, i) => ({
-    id: p.id,
-    number: i + 1,
-    title: p.title,
-    authors: p.authors,
-    venueShort: venueShort(p.venue),
-    venue: p.venue,
-    year: p.year,
-    links: p.links ?? [],
-    award: p.award,
-    abstract: p.abstract,
-    isNew: i === 0,
-    palette: (i + 3) % PALETTES.length,
-  }));
+export function paperEntries(): PaperEntry[] {
+  return publications.map((p, i) => {
+    const short = venueShort(p.venue);
+    const pal = (i + 3) % PALETTES.length;
+    const badge = p.award ? "Award" : i === 0 ? "New" : undefined;
+    return {
+      id: p.id,
+      number: i + 1,
+      title: p.title,
+      authors: p.authors,
+      venueShort: short,
+      venue: p.venue,
+      year: p.year,
+      links: p.links ?? [],
+      award: p.award,
+      abstract: p.abstract,
+      isNew: i === 0,
+      palette: pal,
+      detail: {
+        id: `pub-${p.id}`,
+        poster: p.title,
+        kicker: `${short} ${p.year}`,
+        original: true,
+        badge,
+        palette: pal,
+        meta: [String(p.year), short],
+        body: p.abstract ? [{ type: "section", title: "Abstract", body: [p.abstract] }] : [],
+        facts: [
+          { label: "Authors", value: p.authors },
+          { label: "Venue", value: p.venue },
+          ...(p.award ? [{ label: "Award", value: p.award }] : []),
+        ],
+        links: p.links,
+      },
+    };
+  });
 }
 
 /** News, newest first, split into day / month / year for the list. */

@@ -18,7 +18,7 @@ export default function Card({
       type="button"
       onClick={() => onOpen(item)}
       aria-label={item.kicker ? `${item.poster} (${item.kicker})` : item.poster}
-      className="@container relative block aspect-video w-full overflow-hidden rounded-md text-left shadow-lg shadow-black/40 ring-white transition duration-300 ease-out hover:z-10 hover:scale-[1.06] focus:outline-none focus-visible:z-10 focus-visible:scale-[1.06] focus-visible:ring-2"
+      className="@container relative block aspect-video w-full overflow-hidden rounded-md text-left shadow-lg shadow-black/40 ring-nf-fg transition duration-300 ease-out hover:z-10 hover:scale-[1.06] focus:outline-none focus-visible:z-10 focus-visible:scale-[1.06] focus-visible:ring-2"
       style={paletteStyle(item.palette)}
     >
       <span className="absolute left-3 right-14 top-2.5 flex items-center gap-1.5 truncate text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-white/75">
