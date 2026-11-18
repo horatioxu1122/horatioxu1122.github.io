@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: `Service and awards of ${profile.name}.`,
 };
 
-// "Continue Watching" → Service & Awards: two organized lists.
+// "Continue Watching" → Service & Awards: numbered tile rows, newest first.
 export default function ServicePage() {
   const { awards, credits, meta } = creditsData();
   return (

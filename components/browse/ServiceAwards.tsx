@@ -1,9 +1,25 @@
+import { display } from "@/components/landing/fonts";
 import type { AwardEntry, ServiceCredit } from "@/lib/browse";
+import { paletteStyle } from "./palettes";
+
+interface RankedItem {
+  id: string;
+  /** small label on the tile, e.g. "Program Committee" */
+  kicker: string;
+  /** big text on the tile */
+  name: string;
+  /** under the tile, e.g. "2025–2026" */
+  years: string;
+  /** under the years, e.g. "2025, 2026" */
+  detail?: string;
+  /** red badge on the tile */
+  badge?: string;
+}
 
 /**
- * /browse/service: two organized lists, Awards and Service. Every row has the
- * same shape — years on the left, the name in bold with details below, and
- * the role as a small label — so the page reads like a table.
+ * /browse/service: Service, then Awards, as rows in the style of the Netflix
+ * "Top 10" row — big outlined numbers beside tall tiles. Here the numbers are
+ * not a ranking: they follow the date, newest first (see creditsData()).
  */
 export default function ServiceAwards({
   awards,
@@ -14,94 +30,101 @@ export default function ServiceAwards({
 }) {
   return (
     <div className="flex flex-col gap-[clamp(1.62rem,2.88vw,2.7rem)]">
-      {awards.length ? (
-        <ListSection id="awards" title="Awards" count={awards.length}>
-          {awards.map((a) => (
-            <Row key={a.id} years={String(a.year)} name={a.title} detail={a.org} label="Award" highlight />
-          ))}
-        </ListSection>
-      ) : null}
-
-      {credits.length ? (
-        <ListSection id="service" title="Service" count={credits.length}>
-          {credits.map((c) => (
-            <Row key={c.id} years={c.years} name={c.name} detail={c.detail} label={c.role} />
-          ))}
-        </ListSection>
-      ) : null}
+      <NumberedRow
+        id="service"
+        title="Service"
+        paletteStart={1}
+        items={credits.map((c) => ({
+          id: c.id,
+          kicker: c.role,
+          name: c.name,
+          years: c.years,
+          detail: c.detail,
+        }))}
+      />
+      <NumberedRow
+        id="awards"
+        title="Awards"
+        paletteStart={0}
+        items={awards.map((a) => ({
+          id: a.id,
+          kicker: "Award",
+          name: a.title,
+          years: String(a.year),
+          detail: a.org,
+          badge: "Award",
+        }))}
+      />
     </div>
   );
 }
 
-function ListSection({
+function NumberedRow({
   id,
   title,
-  count,
-  children,
+  items,
+  paletteStart,
 }: {
   id: string;
   title: string;
-  count: number;
-  children: React.ReactNode;
+  items: RankedItem[];
+  paletteStart: number;
 }) {
+  if (items.length === 0) return null;
+
   return (
-    <section aria-labelledby={`${id}-title`} className="px-[4%]">
-      <div className="flex max-w-4xl items-baseline justify-between gap-4">
+    <section aria-labelledby={`${id}-title`}>
+      <div className="flex items-baseline gap-3 px-[4%]">
         <h2 id={`${id}-title`} className="text-[clamp(1.05rem,1.4vw,1.45rem)] font-bold text-[#e5e5e5]">
           {title}
         </h2>
-        <span className="text-sm text-[#808080]">{count}</span>
+        <span className="text-sm text-[#808080]">Newest first</span>
       </div>
-      <ol className="mt-2 flex max-w-4xl flex-col divide-y divide-white/10 border-t border-white/10">
-        {children}
+
+      {/* items-start: a long caption must not stretch the other items (the tiles stay level) */}
+      <ol className="nf-scroller mt-3 flex items-start gap-[clamp(1.25rem,2.5vw,2.5rem)] overflow-x-auto px-[4%] pb-2">
+        {items.map((it, i) => (
+          <li
+            key={it.id}
+            className="grid shrink-0 grid-cols-[auto_auto] grid-rows-[auto_auto] gap-x-0"
+          >
+            {/* big outlined number, half behind the tile (order, not rank) */}
+            <span
+              aria-hidden="true"
+              className="col-start-1 row-start-1 -mr-[0.14em] self-end select-none text-[clamp(7.5rem,12vw,10.5rem)] font-black leading-[0.78] text-[#141414] [-webkit-text-stroke:4px_#6b6b6b] [paint-order:stroke_fill]"
+            >
+              {i + 1}
+            </span>
+
+            <div
+              className="@container relative z-10 col-start-2 row-start-1 aspect-[2/3] w-[clamp(7.5rem,11vw,9.5rem)] self-end overflow-hidden rounded-md shadow-lg shadow-black/50"
+              style={paletteStyle(paletteStart + i * 2)}
+            >
+              <span className="absolute inset-x-2.5 top-2.5 line-clamp-2 text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-white/80">
+                {it.kicker}
+              </span>
+              {it.badge ? (
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 rounded-t bg-[#e50914] px-2 pb-0.5 pt-1 text-[0.58rem] font-bold uppercase tracking-wider text-white">
+                  {it.badge}
+                </span>
+              ) : null}
+              <span
+                className={`${display.className} absolute inset-x-2.5 bottom-6 line-clamp-4 leading-[0.95] text-white [text-shadow:0_2px_6px_rgba(0,0,0,0.5)] ${
+                  it.name.length > 18 ? "text-[13cqw]" : "text-[18cqw]"
+                }`}
+              >
+                {it.name}
+              </span>
+            </div>
+
+            {/* plain text under the tile: easy to read */}
+            <div className="col-start-2 row-start-2 mt-2 w-[clamp(7.5rem,11vw,9.5rem)]">
+              <p className="text-sm tabular-nums text-[#e5e5e5]">{it.years}</p>
+              {it.detail ? <p className="mt-0.5 text-xs leading-relaxed text-[#a3a3a3]">{it.detail}</p> : null}
+            </div>
+          </li>
+        ))}
       </ol>
     </section>
-  );
-}
-
-function Row({
-  years,
-  name,
-  detail,
-  label,
-  highlight = false,
-}: {
-  years: string;
-  name: string;
-  detail?: string;
-  label: string;
-  highlight?: boolean;
-}) {
-  return (
-    <li className="grid grid-cols-[6.5rem_minmax(0,1fr)] gap-x-4 py-4 sm:grid-cols-[8rem_minmax(0,1fr)_auto] sm:items-start">
-      <span className="pt-0.5 text-sm tabular-nums text-[#808080]">{years}</span>
-      <div className="min-w-0">
-        <h3 className="font-semibold leading-snug text-white">{name}</h3>
-        {detail ? <p className="mt-0.5 text-sm leading-relaxed text-[#bcbcbc]">{detail}</p> : null}
-        {/* phones: the label sits under the text */}
-        <RoleLabel label={label} highlight={highlight} className="mt-2 sm:hidden" />
-      </div>
-      <RoleLabel label={label} highlight={highlight} className="hidden sm:inline-block" />
-    </li>
-  );
-}
-
-function RoleLabel({
-  label,
-  highlight,
-  className,
-}: {
-  label: string;
-  highlight: boolean;
-  className: string;
-}) {
-  return (
-    <span
-      className={`${className} w-fit whitespace-nowrap rounded-sm px-1.5 py-0.5 text-xs ${
-        highlight ? "bg-[#e50914] font-bold text-white" : "border border-white/30 text-[#e5e5e5]"
-      }`}
-    >
-      {label}
-    </span>
   );
 }

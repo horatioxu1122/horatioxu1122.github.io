@@ -362,8 +362,24 @@ export interface AwardEntry {
   year: number;
 }
 
+/** "2023-2025" → [2023, 2025]; "2025" → [2025, 2025]. Missing years sort last. */
+function yearSpan(text: string): [number, number] {
+  const years = (text.match(/\d{4}/g) ?? []).map(Number);
+  return years.length ? [Math.min(...years), Math.max(...years)] : [0, 0];
+}
+
+/** Newest first: the latest end year first; on a tie, the later start first. */
+function byNewest(a: string, b: string): number {
+  const [aStart, aEnd] = yearSpan(a);
+  const [bStart, bEnd] = yearSpan(b);
+  return bEnd - aEnd || bStart - aStart;
+}
+
+/** Service and awards, each sorted newest first (the numbers on the page follow this order). */
 export function creditsData() {
-  const credits: ServiceCredit[] = service.map((s, i) => {
+  const sortedService = [...service].sort((a, b) => byNewest(a.year, b.year));
+  const sortedAwards = [...awards].sort((a, b) => b.year - a.year);
+  const credits: ServiceCredit[] = sortedService.map((s, i) => {
     const [name, ...rest] = s.venue.split(":");
     return {
       id: `service-${i}`,
@@ -373,7 +389,7 @@ export function creditsData() {
       years: s.year,
     };
   });
-  const awardList: AwardEntry[] = awards.map((a, i) => ({
+  const awardList: AwardEntry[] = sortedAwards.map((a, i) => ({
     id: `award-${i}`,
     title: a.title,
     org: a.org,
