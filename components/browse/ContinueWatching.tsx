@@ -21,7 +21,7 @@ export default function ContinueWatching({
     <section id="continue" aria-labelledby="continue-title" className="scroll-mt-24">
       <h2
         id="continue-title"
-        className="px-[4%] text-[clamp(1.05rem,1.4vw,1.45rem)] font-bold text-[#e5e5e5]"
+        className="px-[4%] text-[clamp(1.05rem,1.4vw,1.45rem)] font-bold text-nf-fg-2"
       >
         Continue Watching for {viewerName}
       </h2>
@@ -33,7 +33,7 @@ export default function ContinueWatching({
           >
             <Link
               href={it.href}
-              className="group block rounded-md ring-white transition duration-300 ease-out hover:scale-[1.06] focus:outline-none focus-visible:scale-[1.06] focus-visible:ring-2"
+              className="group block rounded-md ring-nf-fg transition duration-300 ease-out hover:scale-[1.06] focus:outline-none focus-visible:scale-[1.06] focus-visible:ring-2"
             >
               <span
                 className="@container relative block aspect-video overflow-hidden rounded-t-md shadow-lg shadow-black/40"

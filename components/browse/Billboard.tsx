@@ -24,7 +24,9 @@ export default function Billboard({
   onMore: () => void;
 }) {
   return (
-    <section id="top" className="relative overflow-hidden">
+    // The banner is dark in both modes (a dark "screen"); only its bottom edge
+    // fades into the page color (.nf-banner-fade in globals.css).
+    <section id="top" className="relative overflow-hidden bg-[#141414]">
       {banner ? (
         <>
           {/* key: fade the new picture in when the profile changes */}
@@ -41,9 +43,9 @@ export default function Billboard({
           className="absolute inset-0 bg-[radial-gradient(70%_80%_at_85%_20%,rgba(229,9,20,0.22),transparent_70%),radial-gradient(50%_60%_at_10%_100%,rgba(229,9,20,0.08),transparent_70%)]"
         />
       )}
-      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-t from-[#141414] to-transparent" />
+      <div aria-hidden="true" className="nf-banner-fade absolute inset-x-0 bottom-0 bg-linear-to-t from-nf-bg to-transparent" />
 
-      <div className="relative z-10 flex min-h-[min(72vh,48rem)] flex-col justify-end px-[4%] pb-[4.76vh] pt-28 md:pt-32">
+      <div data-theme="dark" className="relative z-10 flex min-h-[min(72vh,48rem)] flex-col justify-end px-[4%] pb-[4.76vh] pt-28 md:pt-32">
         <div className="md:max-w-[46rem]">
           <p className="flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-[#e5e5e5] md:text-xs">
             <span className={`${display.className} text-2xl leading-none tracking-normal text-[#e50914]`}>

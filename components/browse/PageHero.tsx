@@ -22,27 +22,27 @@ export default function PageHero({
         className="absolute inset-0 bg-[radial-gradient(60%_90%_at_85%_0%,rgba(229,9,20,0.18),transparent_70%)]"
       />
       <div className="relative max-w-3xl">
-        <Link href="/browse" className="text-sm text-[#bcbcbc] transition-colors hover:text-white">
+        <Link href="/browse" className="text-sm text-nf-muted transition-colors hover:text-nf-fg">
           ← Home
         </Link>
-        <p className="mt-6 flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-[#e5e5e5] md:text-xs">
+        <p className="mt-6 flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-nf-fg-2 md:text-xs">
           <span className={`${display.className} text-2xl leading-none tracking-normal text-[#e50914]`}>
             {initialsOf(landing.wordmark)}
           </span>
           {kicker}
         </p>
-        <h1 className={`${display.className} mt-2 text-[clamp(2.75rem,6vw,5rem)] leading-[0.9] text-white`}>
+        <h1 className={`${display.className} mt-2 text-[clamp(2.75rem,6vw,5rem)] leading-[0.9] text-nf-fg`}>
           {title}
         </h1>
         {meta.length ? (
-          <p className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-sm text-[#bcbcbc]">
+          <p className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-sm text-nf-muted">
             {meta.map((m) => (
               <span key={m}>{m}</span>
             ))}
           </p>
         ) : null}
         {description ? (
-          <p className="mt-3 max-w-xl text-[clamp(1rem,1.2vw,1.1rem)] leading-snug text-white">{description}</p>
+          <p className="mt-3 max-w-xl text-[clamp(1rem,1.2vw,1.1rem)] leading-snug text-nf-fg">{description}</p>
         ) : null}
       </div>
     </section>

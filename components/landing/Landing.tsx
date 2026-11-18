@@ -41,7 +41,8 @@ export default function Landing() {
   }, []);
 
   return (
-    <main className="nf-page min-h-[100dvh] w-full bg-[#141414] text-white">
+    // The intro and "Who's watching?" stay dark in both modes (data-theme="dark").
+    <main data-theme="dark" className="nf-landing min-h-[100dvh] w-full bg-[#141414] text-white">
       <ProfilePicker active={phase === "picker"} />
       {phase === "intro" ? <Intro text={landing.wordmark} onDone={endIntro} /> : null}
     </main>

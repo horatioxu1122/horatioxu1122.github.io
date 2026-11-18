@@ -7,7 +7,7 @@ import { renderInline } from "@/lib/format";
 import Blocks from "./Blocks";
 import { paletteStyle } from "./palettes";
 
-const link = "text-white underline decoration-white/40 underline-offset-2 hover:decoration-white";
+const link = "text-nf-fg underline decoration-current/40 underline-offset-2 hover:decoration-current";
 
 /**
  * The details window for a card. Uses <dialog>, so Escape closes it and the
@@ -45,8 +45,8 @@ export default function DetailsModal({
     <dl className="flex flex-col gap-2.5 text-sm">
       {facts.map((f) => (
         <div key={f.label}>
-          <dt className="inline text-[#777]">{f.label}: </dt>
-          <dd className="inline text-[#ddd]">{renderInline(f.value, link)}</dd>
+          <dt className="inline text-nf-label">{f.label}: </dt>
+          <dd className="inline text-nf-value">{renderInline(f.value, link)}</dd>
         </div>
       ))}
     </dl>
@@ -60,15 +60,16 @@ export default function DetailsModal({
         if (e.target === e.currentTarget) e.currentTarget.close();
       }}
       aria-labelledby="nf-modal-title"
-      className="nf-modal m-auto max-h-[calc(100dvh-3rem)] w-[min(52rem,calc(100vw-1.5rem))] overflow-y-auto rounded-lg bg-[#181818] p-0 text-white shadow-2xl backdrop:bg-black/70"
+      className="nf-modal m-auto max-h-[calc(100dvh-3rem)] w-[min(52rem,calc(100vw-1.5rem))] overflow-y-auto rounded-lg bg-nf-surface p-0 text-nf-fg shadow-2xl backdrop:bg-black/70"
     >
+      {/* The colored top stays dark in both modes, so its white title stays readable. */}
       <div className="relative min-h-44 md:aspect-[16/6]" style={paletteStyle(item.palette)}>
-        <div className="absolute inset-0 bg-linear-to-t from-[#181818] via-[#181818]/20 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/15 to-transparent" />
         <button
           type="button"
           aria-label="Close"
           onClick={() => ref.current?.close()}
-          className="absolute right-3 top-3 z-10 grid size-9 place-items-center rounded-full bg-[#181818] text-white transition-colors hover:bg-[#2f2f2f] focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          className="absolute right-3 top-3 z-10 grid size-9 place-items-center rounded-full bg-black/60 text-white transition-colors hover:bg-black/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
         >
           <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
             <path d="M6 6l12 12M18 6L6 18" />
@@ -95,7 +96,7 @@ export default function DetailsModal({
         </div>
       </div>
 
-      <div className="flex flex-col gap-5 px-6 pb-8 pt-2 md:px-10">
+      <div className="flex flex-col gap-5 px-6 pb-8 pt-5 md:px-10">
         {item.links?.length ? (
           <div className="flex flex-wrap gap-2.5">
             {item.links.map((l, i) => (
@@ -106,7 +107,7 @@ export default function DetailsModal({
                 rel="noreferrer"
                 className={`rounded px-4 py-1.5 text-sm font-semibold transition-colors ${
                   i === 0
-                    ? "bg-white text-black hover:bg-white/80"
+                    ? "bg-nf-inverse-bg text-nf-inverse-fg hover:opacity-80"
                     : "bg-[rgba(109,109,110,0.7)] text-white hover:bg-[rgba(109,109,110,0.45)]"
                 }`}
               >
@@ -116,10 +117,10 @@ export default function DetailsModal({
           </div>
         ) : null}
 
-        <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-[#bcbcbc]">
+        <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-nf-muted">
           {item.meta?.map((m) => <span key={m}>{m}</span>)}
           {item.badge ? (
-            <span className="rounded-sm border border-white/40 px-1.5 text-xs text-[#e5e5e5]">{item.badge}</span>
+            <span className="rounded-sm border border-nf-line-strong px-1.5 text-xs text-nf-fg-2">{item.badge}</span>
           ) : null}
         </p>
 

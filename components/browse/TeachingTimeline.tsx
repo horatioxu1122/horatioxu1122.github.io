@@ -7,19 +7,19 @@ import type { TeachingEntry } from "@/lib/browse";
  */
 export default function TeachingTimeline({ entries }: { entries: TeachingEntry[] }) {
   return (
-    <ol className="relative mx-[4%] max-w-3xl border-l border-white/15 pl-8">
+    <ol className="relative mx-[4%] max-w-3xl border-l border-nf-line pl-8">
       {entries.map((e) => (
         <li key={e.id} className="relative pb-9 last:pb-2">
           <span
             aria-hidden="true"
-            className={`absolute -left-[calc(2rem+7px)] top-1 size-3.5 rounded-full ring-4 ring-[#141414] ${
-              e.lead ? "bg-[#e50914]" : "bg-[#808080]"
+            className={`absolute -left-[calc(2rem+7px)] top-1 size-3.5 rounded-full ring-4 ring-nf-bg ${
+              e.lead ? "bg-[#e50914]" : "bg-nf-faint"
             }`}
           />
-          <p className={`${display.className} text-[1.7rem] leading-none text-white`}>{e.term}</p>
-          <h3 className="mt-2 flex flex-wrap items-center gap-2 text-base font-bold text-white">
+          <p className={`${display.className} text-[1.7rem] leading-none text-nf-fg`}>{e.term}</p>
+          <h3 className="mt-2 flex flex-wrap items-center gap-2 text-base font-bold text-nf-fg">
             {e.course}
-            <span className="rounded-sm border border-white/40 px-1.5 text-xs font-normal text-[#e5e5e5]">
+            <span className="rounded-sm border border-nf-line-strong px-1.5 text-xs font-normal text-nf-fg-2">
               S{e.season}
             </span>
             {e.lead ? (
@@ -28,9 +28,9 @@ export default function TeachingTimeline({ entries }: { entries: TeachingEntry[]
               </span>
             ) : null}
           </h3>
-          <p className="mt-1 text-sm text-[#bcbcbc]">
+          <p className="mt-1 text-sm text-nf-muted">
             {e.role}
-            {e.institution ? <span className="text-[#808080]"> · {e.institution}</span> : null}
+            {e.institution ? <span className="text-nf-faint"> · {e.institution}</span> : null}
           </p>
         </li>
       ))}

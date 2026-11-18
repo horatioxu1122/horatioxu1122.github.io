@@ -26,7 +26,7 @@ export default function SubpageShell({
   const { viewer, switchViewer } = useViewer();
 
   return (
-    <div className="nf-page min-h-screen w-full bg-[#141414] text-white">
+    <div className="nf-page min-h-screen w-full bg-nf-bg text-nf-fg">
       <BrowseNav
         links={LINKS}
         viewer={viewer}

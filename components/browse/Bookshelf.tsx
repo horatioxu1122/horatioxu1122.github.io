@@ -16,7 +16,7 @@ export default function Bookshelf({
     <div className="flex flex-col gap-12">
       {groups.map((g) => (
         <section key={g.category} aria-label={g.category} className="px-[4%]">
-          <h2 className="text-[clamp(1.05rem,1.4vw,1.45rem)] font-bold text-[#e5e5e5]">{g.category}</h2>
+          <h2 className="text-[clamp(1.05rem,1.4vw,1.45rem)] font-bold text-nf-fg-2">{g.category}</h2>
           <ul className="mt-3 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
             {g.books.map((b) => (
               <li key={b.id} className="flex flex-col">
@@ -51,7 +51,7 @@ export default function Bookshelf({
                       href={b.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-[#e5e5e5] underline decoration-white/40 underline-offset-2 hover:decoration-white"
+                      className="text-nf-fg-2 underline decoration-current/40 underline-offset-2 hover:decoration-current"
                     >
                       Open ↗
                     </a>

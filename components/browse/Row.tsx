@@ -44,7 +44,7 @@ export default function Row({
     <section id={row.id} aria-labelledby={`${row.id}-title`} className="group/row relative scroll-mt-24">
       <h2
         id={`${row.id}-title`}
-        className="px-[4%] text-[clamp(1.05rem,1.4vw,1.45rem)] font-bold text-[#e5e5e5]"
+        className="px-[4%] text-[clamp(1.05rem,1.4vw,1.45rem)] font-bold text-nf-fg-2"
       >
         {row.title}
       </h2>

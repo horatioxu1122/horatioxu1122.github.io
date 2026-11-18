@@ -72,7 +72,7 @@ function NumberedRow({
   return (
     <section aria-labelledby={`${id}-title`}>
       <div className="flex items-baseline gap-3 px-[4%]">
-        <h2 id={`${id}-title`} className="text-[clamp(1.05rem,1.4vw,1.45rem)] font-bold text-[#e5e5e5]">
+        <h2 id={`${id}-title`} className="text-[clamp(1.05rem,1.4vw,1.45rem)] font-bold text-nf-fg-2">
           {title}
         </h2>
       </div>
@@ -87,7 +87,7 @@ function NumberedRow({
             {/* big outlined number, half behind the tile (order, not rank) */}
             <span
               aria-hidden="true"
-              className="col-start-1 row-start-1 -mr-[0.14em] self-end select-none text-[clamp(7.5rem,12vw,10.5rem)] font-black leading-[0.78] text-[#141414] [-webkit-text-stroke:4px_#6b6b6b] [paint-order:stroke_fill]"
+              className="col-start-1 row-start-1 -mr-[0.14em] self-end select-none text-[clamp(7.5rem,12vw,10.5rem)] font-black leading-[0.78] text-nf-bg [-webkit-text-stroke:4px_var(--nf-rank-stroke)] [paint-order:stroke_fill]"
             >
               {i + 1}
             </span>
@@ -114,7 +114,7 @@ function NumberedRow({
             </div>
 
             {/* one plain line under the tile: easy to read */}
-            <p className="col-start-2 row-start-2 mt-2 w-[clamp(7.5rem,11vw,9.5rem)] text-xs leading-relaxed text-[#a3a3a3]">
+            <p className="col-start-2 row-start-2 mt-2 w-[clamp(7.5rem,11vw,9.5rem)] text-xs leading-relaxed text-nf-muted-2">
               {it.caption}
             </p>
           </li>

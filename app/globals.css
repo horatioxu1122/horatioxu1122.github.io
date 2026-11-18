@@ -1,14 +1,85 @@
 @import "tailwindcss";
 
-/* The whole site is the dark, Netflix-style design. */
+/* ──────────────────────────────────────────────────────────────
+   Colors of the Netflix-style pages, as named variables with a dark
+   (default) and a light value. <html data-theme="light|dark"> picks one;
+   app/layout.tsx sets it before paint from the visitor's choice
+   (profile menu → Dark mode / Auto). Use them as Tailwind classes:
+   bg-nf-bg, text-nf-fg, text-nf-muted, border-nf-line, …
+   Tiles, cards and the banner keep their own dark look in both modes.
+   An element with data-theme="dark" forces the dark set for its part of
+   the page (the intro, the banner, the top bar over the banner).
+   ────────────────────────────────────────────────────────────── */
+:root,
+[data-theme="dark"] {
+  --nf-bg: #141414; /* page */
+  --nf-surface: #181818; /* windows, award cards */
+  --nf-surface-hover: #2f2f2f;
+  --nf-fg: #ffffff; /* titles, main text */
+  --nf-fg-2: #e5e5e5; /* section titles, nav links */
+  --nf-body: #d2d2d2; /* paragraphs */
+  --nf-muted: #bcbcbc; /* secondary text */
+  --nf-muted-2: #a3a3a3; /* small secondary text */
+  --nf-faint: #808080; /* least important text */
+  --nf-label: #777777; /* "Authors:" labels */
+  --nf-value: #dddddd; /* values after labels */
+  --nf-line: rgb(255 255 255 / 0.1); /* dividers */
+  --nf-line-strong: rgb(255 255 255 / 0.3); /* outlined buttons */
+  --nf-hover: rgb(255 255 255 / 0.05); /* row hover */
+  --nf-rank-stroke: #6b6b6b; /* outlined numbers */
+  --nf-inverse-bg: #ffffff; /* primary button */
+  --nf-inverse-fg: #000000;
+  --nf-popover: rgb(0 0 0 / 0.9); /* menus, search results */
+  color-scheme: dark;
+}
+[data-theme="light"] {
+  --nf-bg: #f5f5f1;
+  --nf-surface: #ffffff;
+  --nf-surface-hover: #ececec;
+  --nf-fg: #141414;
+  --nf-fg-2: #222222;
+  --nf-body: #333333;
+  --nf-muted: #4f4f4f;
+  --nf-muted-2: #5c5c5c;
+  --nf-faint: #6b6b6b;
+  --nf-label: #6b6b6b;
+  --nf-value: #222222;
+  --nf-line: rgb(0 0 0 / 0.1);
+  --nf-line-strong: rgb(0 0 0 / 0.3);
+  --nf-hover: rgb(0 0 0 / 0.04);
+  --nf-rank-stroke: #a3a3a3;
+  --nf-inverse-bg: #141414;
+  --nf-inverse-fg: #ffffff;
+  --nf-popover: rgb(255 255 255 / 0.97);
+  color-scheme: light;
+}
+
 :root {
-  --background: #141414;
-  --foreground: #ffffff;
+  --background: var(--nf-bg);
+  --foreground: var(--nf-fg);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-nf-bg: var(--nf-bg);
+  --color-nf-surface: var(--nf-surface);
+  --color-nf-surface-hover: var(--nf-surface-hover);
+  --color-nf-fg: var(--nf-fg);
+  --color-nf-fg-2: var(--nf-fg-2);
+  --color-nf-body: var(--nf-body);
+  --color-nf-muted: var(--nf-muted);
+  --color-nf-muted-2: var(--nf-muted-2);
+  --color-nf-faint: var(--nf-faint);
+  --color-nf-label: var(--nf-label);
+  --color-nf-value: var(--nf-value);
+  --color-nf-line: var(--nf-line);
+  --color-nf-line-strong: var(--nf-line-strong);
+  --color-nf-hover: var(--nf-hover);
+  --color-nf-rank-stroke: var(--nf-rank-stroke);
+  --color-nf-inverse-bg: var(--nf-inverse-bg);
+  --color-nf-inverse-fg: var(--nf-inverse-fg);
+  --color-nf-popover: var(--nf-popover);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -20,20 +91,27 @@ body {
 }
 
 /* ──────────────────────────────────────────────────────────────
-   Netflix-style pages: the landing at "/" (intro + "Who's watching?")
-   and the home page at "/browse". Both wrap their content in .nf-page.
+   Netflix-style pages: the landing at "/" (.nf-landing, always dark)
+   and the /browse pages (.nf-page, dark or light).
    ────────────────────────────────────────────────────────────── */
-/* Keep the over-scroll area dark, and scroll smoothly to row anchors. */
+/* Keep the over-scroll area in the page color, and scroll smoothly to row anchors. */
 body:has(.nf-page) {
-  background: #141414;
+  background: var(--nf-bg);
 }
-/* Dark scrollbars and form controls, also inside the details window. */
-.nf-page,
-.nf-modal {
-  color-scheme: dark;
+body:has(.nf-landing) {
+  background: #141414;
 }
 html:has(.nf-page) {
   scroll-behavior: smooth;
+}
+
+/* Bottom edge of the /browse banner fades into the page. In light mode the
+   fade is short, so the white text and buttons stay on the dark banner. */
+.nf-banner-fade {
+  height: 40%;
+}
+[data-theme="light"] .nf-banner-fade {
+  height: 1.5rem;
 }
 
 /* Sideways rows: scroll, but hide the scrollbar. */
