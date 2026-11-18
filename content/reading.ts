@@ -1,8 +1,9 @@
 import type { ReadingItem } from "./types";
 
 // ─────────────────────────────────────────────────────────────
-// EDIT ME — content for the "Reading list" page (/classic/reading).
-// Items are grouped by `category` on the page, in first-seen order.
+// EDIT ME — content for the "Reading List" page (/browse/reading).
+// Items are grouped into shelves by `category`, in first-seen order.
+// `rating` (out of 5) shows as a "% Match"; `href` adds an "Open" link.
 // `note` supports inline markdown (**bold**, *italic*, [text](url)).
 // ─────────────────────────────────────────────────────────────
 

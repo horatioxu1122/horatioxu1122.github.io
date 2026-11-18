@@ -2,7 +2,7 @@ import type { Publication } from "./types";
 
 // EDIT ME — newest first. Use **You** to bold your own name in `authors`.
 // award: "Distinguished Paper Award",
-// `id` is a short slug used by the terminal command `cat pub <id>`.
+// `id` is a short unique slug. `abstract` (optional) shows under the paper on /browse.
 export const publications: Publication[] = [
   {
     id: "Model_Xu_2025",
@@ -13,10 +13,7 @@ export const publications: Publication[] = [
     links: [
       { label: "arXiv", href: "https://arxiv.org/abs/2601.12684" },
       { label: "PDF", href: "https://arxiv.org/pdf/2601.12684" },
-    ],
-    abstract:
-      "One short paragraph summarizing the contribution. The terminal shows this when a visitor runs `cat pub example26`.",
-  },
+    ],  },
   {
     id: "Enhancing_Xu_2025",
     title: "Enhancing SDG-Text Classification with Combinatorial Fusion Analysis and Generative AI",
@@ -26,10 +23,7 @@ export const publications: Publication[] = [
     links: [
       { label: "arXiv", href: "https://arxiv.org/abs/2602.11168" },
       { label: "PDF", href: "https://arxiv.org/pdf/2602.11168" },
-    ],
-    abstract:
-      "One short paragraph summarizing the contribution. The terminal shows this when a visitor runs `cat pub example26`.",
-  },
+    ],  },
   {
     id: "Bitcoin_Wu_2025",
     title: "Bitcoin Price Prediction using Machine Learning and Combinatorial Fusion Analysis",
@@ -39,10 +33,7 @@ export const publications: Publication[] = [
     links: [
       { label: "arXiv", href: "https://arxiv.org/abs/2602.00037" },
       { label: "PDF", href: "https://arxiv.org/pdf/2602.00037" },
-    ],
-    abstract:
-      "One short paragraph summarizing the contribution. The terminal shows this when a visitor runs `cat pub example26`.",
-  },
+    ],  },
   {
     id: "InFusionLayer_Roginek_2024",
     title: "InFusionLayer: a CFA-based ensemble tool to generate new classifiers for learning and modeling",

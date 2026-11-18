@@ -1,9 +1,9 @@
-// Shared content types for both the terminal and classic views.
+// Shared content types for every page of the site.
 
 export interface SocialLink {
   label: string;
   href: string;
-  /** short handle shown in the terminal `contact` output */
+  /** optional short handle, e.g. "@name" */
   handle?: string;
 }
 
@@ -32,7 +32,7 @@ export interface Profile {
   researchInterests: ResearchInterest[];
   /** short phrase for the intro line, e.g. "safety in AI" */
   researchArea?: string;
-  /** paragraph(s) expanding on the research directions, shown on the classic home */
+  /** paragraph(s) expanding on the research directions, shown in the banner's "More Info" window */
   researchOverview?: string[];
   /** message to prospective students; omit to hide */
   callForStudents?: string;
@@ -57,7 +57,7 @@ export interface PublicationLink {
 }
 
 export interface Publication {
-  id: string; // short slug used by `cat pub <id>`
+  id: string; // short unique slug
   title: string;
   authors: string; // use **You** to bold your name
   venue: string; // e.g. "USENIX Security 2026"
@@ -117,6 +117,51 @@ export type AboutBlock = AboutTextBlock | AboutVideosBlock | AboutSectionBlock;
 export interface AboutContent {
   /** ordered content blocks, rendered top to bottom */
   blocks: AboutBlock[];
+}
+
+// ── Landing page (name intro + "Who's watching?") ─────────────
+
+/** One tile on the "Who's watching?" screen. All tiles open the same site. */
+export interface ViewerProfile {
+  name: string;
+  /** draw sunglasses on the avatar */
+  sunglasses?: boolean;
+  /**
+   * Background picture (GIF, meme, photo) for the big banner on /browse while
+   * this profile is picked. `src` is a path under /public or a full URL.
+   * Without it the banner shows a plain red glow.
+   */
+  banner?: { src: string; alt: string };
+}
+
+export interface LandingContent {
+  /** big red name in the intro and in the top-left corner */
+  wordmark: string;
+  profiles: ViewerProfile[];
+  /** where a profile tile goes */
+  profileHref: string;
+  /**
+   * How the profile photo is cropped into the square avatar
+   * (CSS background-size / background-position). Tuned for profile.jpg.
+   */
+  avatarCrop: { size: string; position: string };
+  /** Sunglasses position over the avatar, in % of the avatar. Tuned for profile.jpg. */
+  sunglasses: { left: string; top: string; width: string };
+}
+
+// ── Netflix-style home page (/browse) ─────────────────────────
+
+export interface BrowseContent {
+  billboard: {
+    /** small label above the name, e.g. "Research Series" */
+    kicker: string;
+    /** green text, e.g. "99% Match" */
+    match: string;
+    /** e.g. "Season 3" */
+    season: string;
+    /** small boxed "rating", e.g. "PhD" */
+    rating: string;
+  };
 }
 
 // ── Reading list page ─────────────────────────────────────────

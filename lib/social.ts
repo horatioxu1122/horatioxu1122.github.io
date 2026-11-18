@@ -1,11 +1,24 @@
 import { profile } from "@/lib/content";
 
-// Brand-colored social icons with a hover tooltip. Pure CSS tooltip (group-hover),
-// so this stays a server component.
+// Social icons for the /browse banner (BannerSocials).
+// The list is email + profile.socials (content/profile.ts).
 
-type Icon = { viewBox: string; path: string };
+export type SocialKey =
+  | "mail"
+  | "scholar"
+  | "github"
+  | "twitter"
+  | "linkedin"
+  | "substack"
+  | "cv"
+  | "link";
 
-const ICONS: Record<string, Icon> = {
+export interface SocialIcon {
+  viewBox: string;
+  path: string;
+}
+
+export const SOCIAL_ICONS: Record<SocialKey, SocialIcon> = {
   mail: {
     viewBox: "0 0 16 16",
     path: "M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.026A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z",
@@ -40,18 +53,8 @@ const ICONS: Record<string, Icon> = {
   },
 };
 
-const COLOR: Record<string, string> = {
-  mail: "text-zinc-500 dark:text-zinc-400",
-  scholar: "text-[#4285F4]",
-  github: "text-[#181717] dark:text-zinc-100",
-  twitter: "text-[#1DA1F2]",
-  linkedin: "text-[#0A66C2] dark:text-[#4a9be8]",
-  substack: "text-[#FF6719]",
-  cv: "text-zinc-500 dark:text-zinc-400",
-  link: "text-zinc-500 dark:text-zinc-400",
-};
-
-function keyFor(label: string): keyof typeof ICONS {
+/** Pick an icon from a link label in content/profile.ts ("Google Scholar" → scholar). */
+export function socialKeyFor(label: string): SocialKey {
   const l = label.toLowerCase();
   if (l.includes("scholar")) return "scholar";
   if (l.includes("github")) return "github";
@@ -61,47 +64,16 @@ function keyFor(label: string): keyof typeof ICONS {
   return "link";
 }
 
-interface Item {
-  key: keyof typeof ICONS;
+export interface SocialItem {
+  key: SocialKey;
   label: string;
   href: string;
 }
 
-export default function SocialLinks() {
-  const items: Item[] = [
+/** Email first, then every link in profile.socials, in order. */
+export function socialItems(): SocialItem[] {
+  return [
     { key: "mail", label: "Email", href: `mailto:${profile.email}` },
-    ...profile.socials.map((s) => ({ key: keyFor(s.label), label: s.label, href: s.href })),
+    ...profile.socials.map((s) => ({ key: socialKeyFor(s.label), label: s.label, href: s.href })),
   ];
-
-  return (
-    <div className="mt-3 flex flex-wrap items-center gap-4">
-      {items.map((it, i) => {
-        const icon = ICONS[it.key] ?? ICONS.link;
-        return (
-          <a
-            key={i}
-            href={it.href}
-            target={it.href.startsWith("http") ? "_blank" : undefined}
-            rel="noreferrer"
-            aria-label={it.label}
-            className={`group relative inline-flex ${COLOR[it.key] ?? COLOR.link}`}
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox={icon.viewBox}
-              fill="currentColor"
-              aria-hidden="true"
-              className="transition-transform duration-150 group-hover:-translate-y-0.5"
-            >
-              <path d={icon.path} />
-            </svg>
-            <span className="pointer-events-none absolute left-1/2 top-7 z-20 -translate-x-1/2 whitespace-nowrap rounded-md bg-zinc-900 px-2 py-1 text-xs font-normal text-white opacity-0 shadow-sm transition-opacity duration-150 group-hover:opacity-100 dark:bg-zinc-100 dark:text-zinc-900">
-              {it.label}
-            </span>
-          </a>
-        );
-      })}
-    </div>
-  );
 }

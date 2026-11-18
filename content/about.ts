@@ -1,7 +1,7 @@
 import type { AboutContent } from "./types";
 
 // ─────────────────────────────────────────────────────────────
-// EDIT ME — content for the "About me" page (/classic/about).
+// EDIT ME — content for the "About me" window (top bar → "About me" on /browse).
 //
 // `blocks` is an ordered list rendered top to bottom. Each block is one of:
 //   { type: "text",    body: ["paragraph", ...] }          // plain prose
