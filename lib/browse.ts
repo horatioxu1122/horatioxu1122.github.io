@@ -395,11 +395,7 @@ export function creditsData() {
     org: a.org,
     year: a.year,
   }));
-  return {
-    awards: awardList,
-    credits,
-    meta: [plural(awardList.length, "award"), plural(credits.length, "service role")],
-  };
+  return { awards: awardList, credits };
 }
 
 /** One book on the /browse/reading shelf. */

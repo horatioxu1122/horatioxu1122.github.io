@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 
 // "Continue Watching" → Service & Awards: numbered tile rows, newest first.
 export default function ServicePage() {
-  const { awards, credits, meta } = creditsData();
+  const { awards, credits } = creditsData();
   return (
     <SubpageShell footer={<Footer />}>
-      <PageHero kicker="Credits" title="Service & Awards" meta={meta} />
+      <PageHero kicker="Credits" title="Service & Awards" meta={[]} />
       <ServiceAwards awards={awards} credits={credits} />
     </SubpageShell>
   );

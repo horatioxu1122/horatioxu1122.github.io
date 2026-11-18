@@ -8,10 +8,8 @@ interface RankedItem {
   kicker: string;
   /** big text on the tile */
   name: string;
-  /** under the tile, e.g. "2025–2026" */
-  years: string;
-  /** under the years, e.g. "2025, 2026" */
-  detail?: string;
+  /** one plain line under the tile, e.g. "2025, 2026" */
+  caption: string;
   /** red badge on the tile */
   badge?: string;
 }
@@ -38,8 +36,8 @@ export default function ServiceAwards({
           id: c.id,
           kicker: c.role,
           name: c.name,
-          years: c.years,
-          detail: c.detail,
+          // The details ("2025, 2026"); the years when there are no details.
+          caption: c.detail ?? c.years,
         }))}
       />
       <NumberedRow
@@ -50,8 +48,7 @@ export default function ServiceAwards({
           id: a.id,
           kicker: "Award",
           name: a.title,
-          years: String(a.year),
-          detail: a.org,
+          caption: a.org ? `${a.year} · ${a.org}` : String(a.year),
           badge: "Award",
         }))}
       />
@@ -78,7 +75,6 @@ function NumberedRow({
         <h2 id={`${id}-title`} className="text-[clamp(1.05rem,1.4vw,1.45rem)] font-bold text-[#e5e5e5]">
           {title}
         </h2>
-        <span className="text-sm text-[#808080]">Newest first</span>
       </div>
 
       {/* items-start: a long caption must not stretch the other items (the tiles stay level) */}
@@ -117,11 +113,10 @@ function NumberedRow({
               </span>
             </div>
 
-            {/* plain text under the tile: easy to read */}
-            <div className="col-start-2 row-start-2 mt-2 w-[clamp(7.5rem,11vw,9.5rem)]">
-              <p className="text-sm tabular-nums text-[#e5e5e5]">{it.years}</p>
-              {it.detail ? <p className="mt-0.5 text-xs leading-relaxed text-[#a3a3a3]">{it.detail}</p> : null}
-            </div>
+            {/* one plain line under the tile: easy to read */}
+            <p className="col-start-2 row-start-2 mt-2 w-[clamp(7.5rem,11vw,9.5rem)] text-xs leading-relaxed text-[#a3a3a3]">
+              {it.caption}
+            </p>
           </li>
         ))}
       </ol>
