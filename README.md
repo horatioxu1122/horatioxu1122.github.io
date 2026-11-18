@@ -12,7 +12,7 @@ Every page reads from one shared content source, so you edit your info once.
   "About me" in the top bar opens the about window.
 - **Continue Watching pages** — each with its own layout:
   - `/browse/teaching` — a timeline of terms ("seasons" of each course)
-  - `/browse/service` — award cards, then service as end credits
+  - `/browse/service` — two organized lists (Awards, Service): years, name, details, role
   - `/browse/reading` — a bookshelf of poster tiles, one shelf per category
 
 Built with Next.js (App Router), TypeScript and Tailwind CSS v4, as a static export.
