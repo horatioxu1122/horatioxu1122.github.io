@@ -1,6 +1,6 @@
-import SplitLanding from "@/components/landing/SplitLanding";
+import Landing from "@/components/landing/Landing";
 
-// Split-screen chooser: terminal (left) vs classic website (right).
+// Name intro, then a "Who's watching?" profile screen.
 export default function Home() {
-  return <SplitLanding />;
+  return <Landing />;
 }

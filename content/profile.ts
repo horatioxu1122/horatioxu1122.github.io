@@ -2,7 +2,7 @@ import type { Profile } from "./types";
 
 // ─────────────────────────────────────────────────────────────
 // EDIT ME — this is the single source of truth for your identity.
-// Both the terminal and the classic website read from here.
+// Every page of the site reads from here.
 // ─────────────────────────────────────────────────────────────
 
 export const profile: Profile = {
@@ -14,7 +14,7 @@ export const profile: Profile = {
   affiliation: "Fordham University",
   // affiliationLogo: "/logos/fordham.png",
   location: "New York, USA",
-  tagline: "I research in AI safety to prevent or reduce harms caused by AI systems.",
+  tagline: "I work on AI safety.",
   bio: [
     "Hello! I'm a third-year PhD candidate at [Department of Computer and Information Sciences](https://www.fordham.edu/academics/departments/computer-and-information-science/), [Fordham University](https://www.fordham.edu/) ![Fordham](/logos/fordham.png), and a member of the Labratory of Informatics and Data Mining. I am currently advised by [Dr. D. Frank Hsu](https://www.fordham.edu/academics/departments/computer-and-information-science/faculty-and-administration/frank-hsu/).",
   ],

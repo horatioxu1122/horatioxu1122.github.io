@@ -1,6 +1,6 @@
 import React from "react";
 
-// Minimal inline formatter shared by both views.
+// Minimal inline formatter shared by every page.
 // Supports **bold**, *italic*, [text](url), and ![alt](imgSrc) inline images.
 
 type Token = {
@@ -36,7 +36,7 @@ function tokenize(input: string): Token[] {
   return tokens;
 }
 
-/** Render inline markdown to React nodes (for the classic view). */
+/** Render inline markdown to React nodes. */
 export function renderInline(input: string, linkClass = "underline hover:no-underline"): React.ReactNode {
   return tokenize(input).map((t, i) => {
     switch (t.type) {
@@ -66,13 +66,31 @@ export function renderInline(input: string, linkClass = "underline hover:no-unde
   });
 }
 
-/** Strip formatting to plain text (for terminal output that prints raw). */
+/** Strip formatting to plain text (for short labels such as card titles). Links keep their text. */
 export function stripInline(input: string): string {
   return tokenize(input)
-    .map((t) => {
-      if (t.type === "link") return `${t.value} (${t.href})`;
-      if (t.type === "image") return "";
-      return t.value;
-    })
-    .join("");
+    .map((t) => (t.type === "image" ? "" : t.value))
+    .join("")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/** The [text](url) links in a string, in order. Inline images are skipped. */
+export function extractLinks(input: string): { label: string; href: string }[] {
+  return tokenize(input)
+    .filter((t) => t.type === "link" && t.href)
+    .map((t) => ({ label: t.value, href: t.href! }));
+}
+
+/** Turn a YouTube watch/share URL into an embeddable URL. */
+export function youtubeEmbed(url: string): string {
+  try {
+    const u = new URL(url);
+    const id = u.hostname.includes("youtu.be")
+      ? u.pathname.slice(1)
+      : u.searchParams.get("v") ?? "";
+    return id ? `https://www.youtube.com/embed/${id}` : url;
+  } catch {
+    return url;
+  }
 }
