@@ -31,6 +31,7 @@ export const publications: Publication[] = [
     links: [
       { label: "arXiv", href: "https://arxiv.org/abs/2610.13808" },
       { label: "PDF", href: "https://arxiv.org/pdf/2610.13808" },
+      { label: "Code", href: "https://github.com/horatioxu1122/QAIfusion"},
     ],  },
   {
     id: "Cross_Chain_2026",
