@@ -3,6 +3,26 @@ import type { NewsItem } from "./types";
 // EDIT ME — newest first. Inline links allowed as [text](url).
 export const news: NewsItem[] = [
   {
+    date: "2026-11-18",
+    text: "Grateful to receive NSF Access grant! AGI TO THE MOON!",
+  },
+  {
+    date: "2026-11-14",
+    text: "I'm invited as a reviewer for Pattern Recognition.",
+  },
+  {
+    date: "2026-10-09",
+    text: "I'm serving as member of the Local Arrangement Committee for the IEEE Conference on Dependable and Secure Computing. See you Oct. 09-11!",
+  },
+  {
+    date: "2026-09-25",
+    text: "I'm invited to serve as a member of the Technical Program Committee of COMPUTATION TOOLS 2027.",
+  },
+  {
+    date: "2026-08-12",
+    text: "I'm invited to give a talk at Fordham AI Summer Seminar! ",
+  },
+  {
     date: "2026-07-20",
     text: "I'm thrilled to be invited to give a talk at the Clavius Distinguished Workshop on Trustworthy AI on July 22nd, 2026, where I will talk about our latest work on hybrid quantum-classical machine learning! Come check it out!",
   },
