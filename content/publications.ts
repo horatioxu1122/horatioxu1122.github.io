@@ -34,10 +34,10 @@ export const publications: Publication[] = [
     ],  },
   {
     id: "Cross_Chain_2026",
-    title: "Wei Ye, **Jingyan Xu**, Yuanhong Wu",
+    title: "When AI Agents Meet MEV: Cross-Chain Arbitrage in the Agentic Economy",
     abstract:
       "We study cross-chain arbitrage when autonomous AI agents, rather than humans or bots, are the searchers. We model agents as both arbitrage extractors and Maximal Extractable Value targets, derive the optimal trade size for a risk-averse agent under mean-variance utility with stochastic bridge delays, and formalize multi-chain path selection as a belief-weighted online learning problem whose belief estimates converge under a Robbins-Monro schedule. Using 23,000 Uniswap V3 swap events across Ethereum, Arbitrum, and Base, we find that Ethereum-Arbitrum price gaps average 0.044% at 10-second resolution and Arbitrum--Base gaps average 0.013%, so $10,000 trades clear in 63% of L2-L2 windows via CCTP while L1-L2 routes require $50,000 or more for comparable viability. Our adaptive path-selection algorithm outperforms standard baselines by 11% on average, and moderate randomization cuts MEV exposure by over 50% with only modest profit loss.",
-    authors: "**Jingyan Xu**, Yuanhong Wu, Wei Ye, Christina Schweikert, D. Frank Hsu",
+    authors: "Wei Ye, **Jingyan Xu**, Yuanhong Wu",
     venue: "2026 International Conference on Mathematical Research for Blockchain Economy (MARBLE)",
     year: 2026,
     links: [
