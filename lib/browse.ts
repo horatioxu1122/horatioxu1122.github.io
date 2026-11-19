@@ -76,7 +76,8 @@ export interface PaperEntry {
   links: BrowseLink[];
   /** e.g. "Best Paper Award" */
   award?: string;
-  abstract?: string;
+  /** the abstract, one string for each paragraph (empty if there is none) */
+  abstract: string[];
   /** red "New" badge on the newest paper */
   isNew: boolean;
   /** tile gradient, an index into PALETTES */
@@ -166,6 +167,8 @@ export function paperEntries(): PaperEntry[] {
     const short = venueShort(p.venue);
     const pal = (i + 3) % PALETTES.length;
     const badge = p.award ? "Award" : i === 0 ? "New" : undefined;
+    // One string or a list of paragraphs in content/publications.ts.
+    const paragraphs = p.abstract === undefined ? [] : ([] as string[]).concat(p.abstract);
     return {
       id: p.id,
       number: i + 1,
@@ -176,7 +179,7 @@ export function paperEntries(): PaperEntry[] {
       year: p.year,
       links: p.links ?? [],
       award: p.award,
-      abstract: p.abstract,
+      abstract: paragraphs,
       isNew: i === 0,
       palette: pal,
       detail: {
@@ -187,7 +190,7 @@ export function paperEntries(): PaperEntry[] {
         badge,
         palette: pal,
         meta: [String(p.year), short],
-        body: p.abstract ? [{ type: "section", title: "Abstract", body: [p.abstract] }] : [],
+        body: paragraphs.length ? [{ type: "section", title: "Abstract", body: paragraphs }] : [],
         facts: [
           { label: "Authors", value: p.authors },
           { label: "Venue", value: p.venue },

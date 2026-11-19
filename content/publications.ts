@@ -2,8 +2,24 @@ import type { Publication } from "./types";
 
 // EDIT ME — newest first. Use **You** to bold your own name in `authors`.
 // award: "Distinguished Paper Award",
-// `id` is a short unique slug. `abstract` (optional) shows under the paper on /browse.
+// `id` is a short unique slug. `abstract` (optional) shows in the paper's window on /browse.
+// For an abstract with paragraphs, use a list: abstract: ["First paragraph.", "Second paragraph."],
 export const publications: Publication[] = [
+  {
+    id: "digital_money_2026",
+    title: "Who Gets to Be a Bank? Digital Money, Regulatory Design, and the Remaking of Banking: Evidence from the United States, Hong Kong, and Singapore",
+    abstract: [
+      "Digital money is usually analyzed instrument by instrument: stablecoins, tokenized deposits, and central bank digital currency. That approach cannot explain why three jurisdictions with common-law origins and similar financial ambitions have responded to the same technology so differently. Within six months, the Office of the Comptroller of the Currency conditionally approved five national trust bank charters for digital-asset firms, and the Hong Kong Monetary Authority granted its first stablecoin issuer licenses to institutions tied to the city’s note-issuing banks, while the Monetary Authority of Singapore concentrated on wholesale settlement infrastructure. This Article argues that each jurisdiction is deciding a question that instrument labels obscure: who may perform bank-like functions, which public privileges they receive, and where public support ends.",
+      "Drawing on a structured comparison, the Article identifies three regulatory grammars, each operating through a distinct legal technique. The United States relies on chartering: its charter-menu model distributes bank-like functions among national trust banks, full-service de novo banks, incumbent banks issuing deposit tokens, and state special-purpose institutions, and the GENIUS Act adds a statutory layer for stablecoin issuers. Hong Kong relies on licensing, anchoring stablecoin issuance in institutions close to its monetary architecture. Singapore relies on access to infrastructure, organizing tokenized finance around regulator-coordinated settlement networks and wholesale central bank money.",
+      "The Article’s central claim is that digital money unbundles bank-like functions technologically, while law rebundles them institutionally by attaching public privileges and obligations to the entities that perform them. Each technique has a characteristic failure point: chartering produces an unstable regulatory perimeter, licensing confers public credibility that holders may mistake for a public backstop, and infrastructure access concentrates discretion in the governance of the settlement layer. The Article therefore proposes that regulatory obligations track the functions an entity performs and the public privileges it receives, and that the boundary of public support be declared ex ante rather than drawn in a crisis.",
+    ],
+    authors: "Wei Ye, **Jingyan Xu**, Erick W. Rengifo",
+    venue: "SSRN",
+    year: 2026,
+    links: [
+      { label: "SSRN", href: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7674498" },
+    ],
+  },
   {
     id: "Model_Xu_2025",
     title: "A Model Fusion Approach for Enhancing Credit Approval Decision Making",

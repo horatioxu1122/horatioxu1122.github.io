@@ -64,7 +64,7 @@ export interface Publication {
   year: number;
   links?: PublicationLink[];
   award?: string; // e.g. "Distinguished Paper Award"
-  abstract?: string;
+  abstract?: string | string[]; // a list shows as separate paragraphs
 }
 
 export interface Award {
