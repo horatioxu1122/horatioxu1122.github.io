@@ -21,6 +21,30 @@ export const publications: Publication[] = [
     ],
   },
   {
+    id: "diversity_aware_2026",
+    title: "Diversity-Aware Ensemble of Quantum-Classical Models via Combinatorial Fusion",
+    abstract:
+      "Variational quantum circuits (VQCs) are highly sensitive to circuit architecture, yet most quantum machine learning pipelines select a single best design and discard the remaining candidates. This paper addresses whether the structural diversity across quantum circuit search spaces can be used to produce stronger predictions through model fusion. We apply Combinatorial Fusion Analysis (CFA), a model fusion framework that selects and combines multiple scoring systems using rank-score function (RSF) and cognitive diversity (CD), to a pool of 29 architecturally diverse classical models and quantum circuits. Using a diversity-aware model selection method, we identify subsets of maximally diverse models and combine them with both score and rank combination. Experiments on four binary classification benchmarks covering different domains demonstrate that CFA-based hybrid classical-quantum fusion consistently outperform the best individual model on every dataset considered with improvements up to 6.03% in accuracy. When comparing with relevant literatures, the CFA framework further achieves superior performance across all four datasets.",
+    authors: "**Jingyan Xu**, Yuanhong Wu, Samuel Yen-Chi Chen, Sean Patten, Christina Schweikert, D. Frank Hsu",
+    venue: "2026 International Conference on Quantum Computing and Engineering (QCE26/IEEE Quantum Week)",
+    year: 2026,
+    links: [
+      { label: "arXiv", href: "https://arxiv.org/abs/2610.13808" },
+      { label: "PDF", href: "https://arxiv.org/pdf/2610.13808" },
+    ],  },
+  {
+    id: "Cross_Chain_2026",
+    title: "Wei Ye, **Jingyan Xu**, Yuanhong Wu",
+    abstract:
+      "We study cross-chain arbitrage when autonomous AI agents, rather than humans or bots, are the searchers. We model agents as both arbitrage extractors and Maximal Extractable Value targets, derive the optimal trade size for a risk-averse agent under mean-variance utility with stochastic bridge delays, and formalize multi-chain path selection as a belief-weighted online learning problem whose belief estimates converge under a Robbins-Monro schedule. Using 23,000 Uniswap V3 swap events across Ethereum, Arbitrum, and Base, we find that Ethereum-Arbitrum price gaps average 0.044% at 10-second resolution and Arbitrum--Base gaps average 0.013%, so $10,000 trades clear in 63% of L2-L2 windows via CCTP while L1-L2 routes require $50,000 or more for comparable viability. Our adaptive path-selection algorithm outperforms standard baselines by 11% on average, and moderate randomization cuts MEV exposure by over 50% with only modest profit loss.",
+    authors: "**Jingyan Xu**, Yuanhong Wu, Wei Ye, Christina Schweikert, D. Frank Hsu",
+    venue: "2026 International Conference on Mathematical Research for Blockchain Economy (MARBLE)",
+    year: 2026,
+    links: [
+      { label: "arXiv", href: "https://arxiv.org/abs/2609.17897" },
+      { label: "PDF", href: "https://arxiv.org/pdf/2609.17897" },
+    ],  },
+  {
     id: "Model_Xu_2025",
     title: "A Model Fusion Approach for Enhancing Credit Approval Decision Making",
     abstract:
