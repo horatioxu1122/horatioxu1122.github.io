@@ -38,7 +38,7 @@ export function buildSearchIndex(): SearchEntry[] {
           href: `/browse#pub-${p.id}`,
         },
         p.authors,
-        p.abstract,
+        ...([] as string[]).concat(p.abstract ?? []),
         String(p.year),
       ),
     ),
